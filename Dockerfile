@@ -1,4 +1,4 @@
-FROM ubuntu:focal-20210416
+FROM ubuntu:hirsute-20210422
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -12,9 +12,10 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list \
   && apt-get update
 
 # RUN wget https://download.gnome.org/sources/gtksourceview/3.24/gtksourceview-3.24.11.tar.xz \
-RUN apt-get build-dep -y pspp
 
 RUN mkdir /apps
+
+RUN apt-get build-dep -y pspp
 
 RUN cd /apps && wget http://archive.ubuntu.com/ubuntu/pool/universe/s/spread-sheet-widget/spread-sheet-widget_0.6.orig.tar.gz \
   && tar -xf spread-sheet-widget_0.6.orig.tar.gz \
@@ -24,9 +25,8 @@ RUN cd /apps && wget http://archive.ubuntu.com/ubuntu/pool/universe/s/spread-she
 
 
 RUN cd /apps && wget http://ftpmirror.gnu.org/pspp/pspp-1.4.1.tar.gz \
-  && tar -xzf pspp-1.4.1.tar.gz \
+ && tar -xzf pspp-1.4.1.tar.gz \
   && cd pspp-1.4.1 \
   && ./configure \
   && make \
   && make install
-
